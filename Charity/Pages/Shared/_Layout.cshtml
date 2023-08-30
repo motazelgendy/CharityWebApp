@@ -1,0 +1,326 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@using Microsoft.AspNetCore.Http
+@using Charity.Utility
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>@ViewData["Title"] - Charity WebApp</title>
+
+    <!-- CSS FILES -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="~/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="~/css/templatemo-kind-heart-charity.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="~/lib/leaflet/leaflet.min.css" rel="stylesheet" />
+    <link href="~/lib/leaflet/leaflet.css" rel="stylesheet" />
+
+    <!--
+
+    TemplateMo 581 Kind Heart Charity
+
+    https://templatemo.com/tm-581-kind-heart-charity
+
+    -->
+
+</head>
+
+<body id="section_1">
+
+    <header class="site-header">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-12 d-flex flex-wrap">
+                    <p class="d-flex me-4 mb-0">
+                        <i class="bi-geo-alt me-2"></i>
+                        مصر - القاهرة
+                    </p>
+
+                    <p class="d-flex mb-0">
+                        <i class="bi-envelope me-2"></i>
+
+                        <a href="mailto:info@charity.com">
+                            info@charity.com
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-12 ms-auto d-lg-block d-none">
+                    <ul class="social-icon">
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-twitter"></a>
+                        </li>
+
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-facebook"></a>
+                        </li>
+
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-instagram"></a>
+                        </li>
+
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-youtube"></a>
+                        </li>
+
+                        <li class="social-icon-item">
+                            <a href="#" class="social-icon-link bi-whatsapp"></a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg bg-light shadow-lg">
+
+        <div class="container" dir="rtl"
+             style="width: 100%;">
+            <a class="navbar-brand" asp-area="" asp-page="/Customer/Home/Index">
+                <img src="~/imgs/logo.png" class="logo img-fluid" alt=""/>
+                <!-- <span>
+                   جمعية البرالخيرية
+                    <small style="    font-size: initial;">بظهران الجنوب  </small>
+                </span> -->
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto" dir="rtl">
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" asp-area="" asp-page="/Customer/Home/Index">الصفحة الرئيسية</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
+                           id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">برامجنا </a>
+
+                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Customer/Home/Index" asp-route-catid="1">الاطعام</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Customer/Home/Index" asp-route-catid="2">الكفارات</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Customer/Home/Index" asp-route-catid="3">الصدقات الجارية</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Customer/Home/Index" asp-route-catid="4">النذور و العقيقة</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-page="/Customer/Home/Index" asp-route-catid="5">الكفالات</a></li>
+
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-page="/Customer/chat/onlineclinic">العيادات المجانية</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Bloodbanks" asp-action="Index">بنك الدم</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-page="/Customer/Volunteers/index">التطوع </a>
+                    </li>
+                    @if (User.IsInRole(UserRole.AdminRole))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
+                               id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">لوحة التحكم </a>
+
+                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                                <li><a class="dropdown-item" asp-area="" asp-page="/admin/categories/Index">الفئات</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/admin/programstypes/Index">الفئات الفرعية</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/admin/programitems/Index">التبرعات و البرامج</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/admin/order/orderlist">طلبات التبرع</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-page="/admin/BloodBankmanage/index">بنك الدم</a></li>
+                                <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">اضافة مستخدم</a></li>
+
+
+
+                            </ul>
+                        </li>
+                    }
+
+                    <ul class="navbar-nav ms-auto" dir="rtl">
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-page="/Customer/Cart/Index">
+                                <i class="fa fa-shopping-cart"></i>
+                            </a>
+
+                        </li>
+                    </ul>
+                   
+                    
+
+                     @if (SignInManager.IsSignedIn(User))
+                     {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link click-scroll dropdown-toggle" href="#section_5"
+                               id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false"> ادارة الحساب <i class="fas fa-user-circle"></i> </a>
+
+                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                                <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">اعدادات الحساب</a></li>
+                                <li>
+                                    <form id="logoutForm" class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                                        <button  id="logout" type="submit" class="dropdown-item">تسجيل الخروج</button>
+                                    </form>
+                                </li>
+                                
+
+                            </ul>
+                        </li>
+                    }
+                  
+                    else
+                    {
+                        <ul class="navbar-nav ms-auto" dir="rtl">
+
+                            <li class="nav-item ms-3">
+
+                                <a class="nav-link custom-btn custom-border-btn btn" asp-area="Identity" asp-page="/Account/Login">تسجيل الدخول <i class="fas fa-user-circle"></i></a>
+
+                            </li>
+                        </ul>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <style>
+        .navbar .nav-item a {
+            font-size: larger;
+            font-weight: 600;
+        }
+
+        .collapse {
+            margin-right: 10rem;
+        }
+    </style>
+
+        <main>
+            @RenderBody()
+        </main>
+
+
+    <!--start footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12 mb-4">
+                    <img src="images/logo.png" class="logo img-fluid" alt="" style="    width: fit-content;                    ">
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                    <h5 class="site-footer-title mb-3">روابط سريعة</h5>
+
+                    <ul class="footer-menu">
+
+
+                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">الرؤية</a></li>
+
+                        <li class="footer-menu-item"><a href="#" class="footer-menu-link">الرسالة</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-12 mx-auto">
+                    <h5 class="site-footer-title mb-3">اتصل بنا</h5>
+
+                    <p class="text-white d-flex mb-2">
+                        <i class="bi-telephone me-2"></i>
+
+                        <a href="tel: 305-240-9671" class="site-footer-link">
+                            123456789
+                        </a>
+                    </p>
+
+                    <p class="text-white d-flex">
+                        <i class="bi-envelope me-2"></i>
+
+                        <a href="mailto:info@chrity.com" class="site-footer-link">
+                            info@charity.com
+                        </a>
+                    </p>
+
+                    <p class="text-white d-flex mt-3">
+                        <i class="bi-geo-alt me-2"></i>
+                        القاهرة - مصر
+                    </p>
+
+                    <a href="#" class="custom-btn btn mt-3">Get Direction</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-footer-bottom">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-6 col-md-7 col-12">
+                        <p class="copyright-text mb-0">جميع الحقوق محفوظة © </p>
+                    </div>
+
+                    <div class="col-lg-6 col-md-5 col-12 d-flex justify-content-center align-items-center mx-auto">
+                        <ul class="social-icon">
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link bi-twitter"></a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link bi-facebook"></a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link bi-instagram"></a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link bi-linkedin"></a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="" class="social-icon-link bi-youtube"></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--end footer -->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+   
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.sticky.js"></script>
+    <script src="~/js/click-scroll.js"></script>
+    <script src="~/js/counter.js"></script>
+    <script src="~/js/custom.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

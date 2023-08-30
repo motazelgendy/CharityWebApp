@@ -1,0 +1,30 @@
+﻿@page
+@model Charity.Pages.Admin.Categories.CreateModel   
+
+
+<form method="post" dir="rtl" class="custom-form donate-form">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2"
+        <h2 class="text-primary pl-3">
+            انشاء مصنف جديد
+        </h2>
+        <hr />
+        </div>
+           <div class="mb-3">
+              <label asp-for="@Model.category.Name"></label>
+               <input asp-for="@Model.category.Name" class="form-control" />
+               <span asp-validation-for="category.Name" class="text-danger"></span>
+               
+               </div>
+      <div class="mb-3">
+              <label asp-for="@Model.category.DisplayOrder"></label>
+               <input asp-for="@Model.category.DisplayOrder" class="form-control" />
+                  <span asp-validation-for="category.DisplayOrder" class="text-danger"></span>
+               
+               </div>
+               <button type="submit" class="btn-primary" style="width:150px;">انشاء</button>
+               
+           </div>
+
+    </div>
+</form>

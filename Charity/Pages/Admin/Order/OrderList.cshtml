@@ -1,0 +1,36 @@
+﻿@page
+@model Charity.Pages.Admin.Order.OrderListModel
+<div class="container p-3" dir="rtl">
+    <div class="row pt-4">
+        <div class="col-12">
+            <h2 class="text-muted">قائمة التبرعات </h2>
+        </div>
+        
+    </div>
+    <br /><br />
+
+    <div class="card">
+        <div class="card-body">
+            <table id="DT_load" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>رقم الطلب</th>
+                        <th>اجمالى التبرع</th>
+                        <th>الحالة</th>
+                        <th>اسم المتبرع الاول</th>
+                        <th>اسم المتبرع الاخير</th>
+                        <th>تاريخ التبرع</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+            </table>
+            <div>
+            </div>
+        </div>
+
+
+    </div>
+    @section Scripts{
+        <script src="~/js/OrderList.js"></script>
+    }

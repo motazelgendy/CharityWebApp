@@ -1,0 +1,69 @@
+﻿@page
+@model Charity.Pages.Customer.Volunteers.IndexModel
+       
+                <div class="row">
+
+                    <div class="col-lg-6 col-12 mx-auto">
+                        <form class="custom-form donate-form" method="post" dir="rtl">
+                            <h3 class="mb-4">تطوع معانا</h3>
+
+                         
+
+                                <div class="col-lg-12 col-12">
+                                    <h5 class="mt-1">البيانات الشخصية</h5>
+                                </div>
+
+                                <div class="col-lg-6 col-12 mt-2">
+                        
+                        <input asp-for="@Model.volunteer.FirstName id="donation-name" class="form-control"
+                                        placeholder=" الاسم الاول" required>
+                <label asp-for="@Model.volunteer.FirstName"></label>
+                <span asp-validation-for="volunteer.FirstName" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-lg-6 col-12 mt-2">
+                       
+                        <input asp-for="@Model.volunteer.LastName  id="donation-email"
+                                         class="form-control" placeholder="اللقب"
+                                        required>
+                <label asp-for="@Model.volunteer.LastName"></label>
+                <span asp-validation-for="volunteer.LastName" class="text-danger"></span>
+                                </div>
+								
+								 <div class="col-lg-6 col-12 mt-2">
+                        
+                        <input asp-for="@Model.volunteer.Email type=" email" id="donation-email"
+                                        class="form-control" placeholder="الايميل"
+                                        required>
+                <label asp-for="@Model.volunteer.Email"></label>
+                <span asp-validation-for="volunteer.Email" class="text-danger"></span>
+                                </div>
+								
+								<div class="col-lg-6 col-12 mt-2">
+                       
+                        <input asp-for="@Model.volunteer.Age type=" email" id="donation-email"
+                                        class="form-control" placeholder="السن"
+                                        required>
+                <label asp-for="@Model.volunteer.Age"></label>
+                <span asp-validation-for="volunteer.Age" class="text-danger"></span>
+                                </div>
+								<div class="col-lg-6 col-12 mt-2">
+                        
+                        <input asp-for="@Model.volunteer.PhoneNumber type=" email" id="donation-email"
+                                        class="form-control" placeholder="رقم الهاتف"
+                                        required>
+                <label asp-for="@Model.volunteer.PhoneNumber"></label>
+                <span asp-validation-for="volunteer.PhoneNumber" class="text-danger"></span>
+                                </div>
+
+
+
+                                  
+
+                                    <button type="submit" class="form-control mt-4">قدم الطلب</button>
+                             
+                        </form>
+                    </div>
+
+                </div>
+  

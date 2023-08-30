@@ -1,0 +1,62 @@
+﻿@page
+@model Charity.Pages.Admin.ProgramItems.UpsertModel
+
+
+
+<form method="post" enctype="multipart/form-data" dir="rtl" class="custom-form donate-form">
+	<input asp-for="ProgramItem.Id" hidden />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2"
+        <h2 class="text-primary pl-3">
+           @(Model.ProgramItem.Id != 0 ? "تحديث" : "انشاء") تبرع جديد
+        </h2>
+        <hr />
+        </div>
+           <div class="mb-3">
+					<label asp-for="ProgramItem.Name"></label>
+					<input asp-for="ProgramItem.Name" class="form-control" />
+					<span asp-validation-for="ProgramItem.Name" class="text-danger"></span>
+				</div>
+			<div class="col-sm-10">
+					<label asp-for="ProgramItem.Description"></label>
+			<textarea asp-for="ProgramItem.Description" class="form-control"></textarea>
+					<span asp-validation-for="ProgramItem.Description" class="text-danger"></span>
+				</div>
+                <div class="mb-3">
+					<label asp-for="ProgramItem.Price"></label>
+					<input asp-for="ProgramItem.Price" class="form-control" />
+					<span asp-validation-for="ProgramItem.Price" class="text-danger"></span>
+				</div>
+                <div class="mb-3">
+					<label asp-for="ProgramItem.Image"></label>
+					<input type="file" name="files" id="uploadBox" class="form-control" />
+				
+				</div>
+                <div class="mb-3">
+					<label asp-for="ProgramItem.CategoryId"></label>
+					<select asp-for="ProgramItem.CategoryId" asp-items="Model.CategoryList" class="form-select">
+						<option disabled selected>-اختر فئة-</option>
+					</select>
+					<span asp-validation-for="ProgramItem.CategoryId" class="text-danger"></span>
+
+				</div>
+				 <div class="mb-3">
+					<label asp-for="ProgramItem.ProgramTypeId"></label>
+					<select asp-for="ProgramItem.ProgramTypeId" asp-items="Model.ProgramtypeList" class="form-select">
+						<option disabled selected>-اختر نوع البرنامج-</option>
+					</select>
+					<span asp-validation-for="ProgramItem.ProgramTypeId" class="text-danger"></span>
+
+				</div>
+
+			
+              
+               
+               </div>
+               <button type="submit" class="btn-primary" style="width:150px;">@(Model.ProgramItem.Id != 0 ? "تحديث" : "انشاء")</button>
+               
+           </div>
+
+    </div>
+</form>
+

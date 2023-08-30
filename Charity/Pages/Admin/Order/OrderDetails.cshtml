@@ -1,0 +1,52 @@
+﻿@page
+@model Charity.Pages.Admin.Order.OrderDetailsModel
+
+<form method="post" dir="rtl">
+	<br />
+	<div class="backgroundWhiteBorder">
+		<div class="container">
+			<div class="card">
+				<div class="card-header text-light ml-0 ">
+					<div class="row">
+						<div class="col-6 pt-2">
+							<h3 class="text-black-50">تفاصيل الطلب</h3>
+						</div>
+						<div class="col-12 text-sm-center col-md-6 text-md-start">
+							<a asp-page="orderlist" class="btn btn-secondary btn-sm">العودة للقائمة</a>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="container rounded p-2">
+						<div class="row">
+
+
+							<div class="col-12 col-lg-5 offset-lg-1">
+								<h4 class="d-flex justify-content-between align-items-center mb-3">
+									<span class="text-secondary"> تفاصيل طلب التبرع:</span>
+								</h4>
+								<ul class="list-group mb-3">
+									@foreach (var detial in Model.OrderDetailVM.OrderDetails)
+									{
+										<li class="list-group-item d-flex justify-content-between">
+											<div>
+												<h6 class="my-0">@detial.Name</h6>
+												<small class="text-muted">الكمية: @detial.Count</small>
+											</div>
+											<span class="text-muted">EPG @(detial.Price * @detial.Count)</span>
+										</li>
+									}
+									<li class="list-group-item d-flex justify-content-between bg-secondary">
+										<strong class="text-light">الاجمالى (جنيه مصرى)</strong>
+										<strong class="text-light">EPG @Model.OrderDetailVM.OrderHeader.OrderTotal</strong>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+</form>

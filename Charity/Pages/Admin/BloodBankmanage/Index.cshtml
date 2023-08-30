@@ -1,0 +1,61 @@
+﻿@page
+@model Charity.Pages.Admin.BloodBankmanage.IndexModel
+
+
+
+
+<div class="container p-3" dir="rtl" >
+<div class="row pt-4">
+<div class="col-12">
+    <h2 class="text-muted">قائمة بنوك الدم</h2>
+    </div>
+    <div class="col-12 text-end">
+            <a asp-page="Create" class="btn btn-secondary">
+                <i class="bi bi-pencil-square"></i> &nbsp;  اضافة عنوان 
+            </a>
+        </div>
+        </div>
+        <br /><br />
+
+        <table class="table table-bordered table-striped style="width:100%=>
+            <thead>
+                <tr>
+                    <th>
+                        الاسم       
+
+                    </th>
+                    <th>
+                        العنوان
+                    </th>
+                <th>
+                    Latitude
+                </th>
+                <th>
+                    Longitude
+                </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var obj in Model.bloodBanks)
+            {
+                  <tr>
+					<td width="50%">@obj.Name</td>
+					<td width="30%">@obj.Address</td>
+                    <td width="30%">@obj.Latitude</td>
+                    <td width="30%">@obj.Longitude</td>
+					<td>
+						<div class="w-75 btn-group" role="group">
+                            <a asp-page="Edit" asp-route-id="@obj.Id" class="btn btn-secondary mx-2">
+							<i class="bi bi-pencil-square"></i>
+						</a>
+						<a asp-page="Delete" asp-route-id="@obj.Id"  class="btn btn-danger mx-2">
+							<i class="bi bi-trash-fill"></i>
+						</a>
+						</div>
+					</td>
+				</tr>
+            }
+         
+            </tbody>
+        </table>
