@@ -1,7 +1,6 @@
 # Cheers Charity Webapp
 
-My Graduation Project at FGSSR I built a small E-commerce web app with N-tier Architecture and
-Repository Pattern With UoW for a Charity organization.
+My Graduation Project at FGSSR I built an E-commerce web app to help Charities to gain the Donations & provides Charitable services.
 
 ## Features :
 - Full Categoried Items & programs with cart
