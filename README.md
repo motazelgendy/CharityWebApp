@@ -1,6 +1,5 @@
 # Cheers Charity Webapp
-
-My Graduation Project at FGSSR I built an E-commerce web app to help Charities to gain the Donations & provides Charitable services.
+an E-commerce web app to help Charities to gain the Donations & provides Charitable services.
 
 ## Features :
 - Full Categoried Items & programs with cart
