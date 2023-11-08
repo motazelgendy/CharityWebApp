@@ -1,4 +1,4 @@
-#harity Webapp
+# Charity Webapp
 an E-commerce web app to help Charities to gain the Donations & provides Charitable services.
 
 ## Features :
