@@ -1,4 +1,4 @@
-# Cheers Charity Webapp
+#harity Webapp
 an E-commerce web app to help Charities to gain the Donations & provides Charitable services.
 
 ## Features :
